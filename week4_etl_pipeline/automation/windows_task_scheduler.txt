@@ -1,0 +1,34 @@
+# Automation Proof — Windows (Task Scheduler)
+#
+# Equivalent daily 02:00 schedule, for a Windows deployment. Two ways to set
+# it up: the GUI steps, and the equivalent one-line `schtasks` command
+# (useful for scripted deployment or for pasting into a ticket as proof).
+
+## Option A — Task Scheduler GUI
+1. Open "Task Scheduler" -> Action -> "Create Basic Task..."
+2. Name: "Ops Sensor ETL Pipeline"
+3. Trigger: Daily, Start time: 2:00:00 AM
+4. Action: "Start a program"
+   - Program/script:  C:\opt\week4_etl_pipeline\venv\Scripts\python.exe
+   - Add arguments:   run_pipeline.py
+   - Start in:        C:\opt\week4_etl_pipeline
+5. Finish, then open the new task's Properties -> check
+   "Run whether user is logged on or not" so it runs unattended overnight.
+
+## Option B — Equivalent schtasks command (Admin PowerShell/cmd)
+schtasks /create /tn "Ops Sensor ETL Pipeline" ^
+  /tr "C:\opt\week4_etl_pipeline\venv\Scripts\python.exe C:\opt\week4_etl_pipeline\run_pipeline.py" ^
+  /sc daily /st 02:00 /ru SYSTEM
+
+## Verify the task is registered:
+schtasks /query /tn "Ops Sensor ETL Pipeline" /v /fo LIST
+
+Example output:
+    TaskName:      \Ops Sensor ETL Pipeline
+    Next Run Time: 7/22/2026 2:00:00 AM
+    Status:        Ready
+    Last Run Time: 7/21/2026 2:00:00 AM
+    Last Result:   0                      <-- 0 = success; run_pipeline.py's
+                                               non-zero exit code on failure
+                                               will surface here as a
+                                               non-zero "Last Result" too.

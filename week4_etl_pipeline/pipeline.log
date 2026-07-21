@@ -1,0 +1,17 @@
+2026-07-21 09:28:48 | INFO     | ======================================================================
+2026-07-21 09:28:48 | INFO     | PIPELINE START: 2026-07-21T09:28:48.718403
+2026-07-21 09:28:48 | INFO     | EXTRACT: read 5015 rows from 'data/ops_sensor_log_dirty.csv'
+2026-07-21 09:28:48 | INFO     | TRANSFORM: 5015 rows in -> 4849 rows out (166 dropped)
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_be_between {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'Pressure_PSI', 'min_value': 0.0, 'max_value': 500.0}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_be_between {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'Temperature_C', 'min_value': -50.0, 'max_value': 200.0}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_be_between {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'Flow_Rate_LPM', 'min_value': 0.0, 'max_value': 2000.0}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_not_be_null {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'timestamp'}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_be_in_set {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'Zone', 'value_set': ['Zone_North', 'Zone_South', 'Zone_East', 'Zone_West', 'Zone_Central']}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_column_values_to_be_in_set {'batch_id': 'pandas_1784626128-ops_batch_asset', 'column': 'Shift', 'value_set': ['Morning', 'Afternoon', 'Night']}
+2026-07-21 09:28:48 | INFO     | VALIDATE: [PASS] expect_table_row_count_to_be_between {'batch_id': 'pandas_1784626128-ops_batch_asset', 'min_value': 1}
+2026-07-21 09:28:48 | INFO     | VALIDATE: all data quality checks passed.
+2026-07-21 09:28:48 | INFO     | LOAD: target table 'ops_readings_clean' does not exist yet, will be created
+2026-07-21 09:28:49 | INFO     | LOAD: inserted 4849 row(s) into 'ops_readings_clean' at 'data/ops_pipeline.db'
+2026-07-21 09:28:49 | INFO     | PIPELINE SUCCESS: extracted=5015 rows, transformed=4849 rows, loaded=4849 rows, duration=0.30s
+2026-07-21 09:28:49 | INFO     | PIPELINE END: 2026-07-21T09:28:49.013587
+2026-07-21 09:28:49 | INFO     | ======================================================================

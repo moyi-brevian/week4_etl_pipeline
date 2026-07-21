@@ -1,0 +1,4 @@
+pandas>=2.0
+sqlalchemy>=2.0
+python-dotenv>=1.0
+great_expectations>=1.0

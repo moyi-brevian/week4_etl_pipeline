@@ -1,0 +1,91 @@
+{
+  "expectations": [
+    {
+      "id": "b443893a-bd7e-4c71-a9b2-9cbbc2ad0345",
+      "kwargs": {
+        "column": "Pressure_PSI",
+        "max_value": 500.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "3a153b55-8bb6-427e-a925-5ffbf2030bdf",
+      "kwargs": {
+        "column": "Temperature_C",
+        "max_value": 200.0,
+        "min_value": -50.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "19619a12-794a-4895-8c48-4b234760fc6c",
+      "kwargs": {
+        "column": "Flow_Rate_LPM",
+        "max_value": 2000.0,
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "7505684f-549c-4512-90c2-c4e17597b33c",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "67053e50-7839-4656-8e22-053e564987fe",
+      "kwargs": {
+        "column": "Zone",
+        "value_set": [
+          "Zone_North",
+          "Zone_South",
+          "Zone_East",
+          "Zone_West",
+          "Zone_Central"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "64044e00-f25c-4e57-83b0-5c779e20784a",
+      "kwargs": {
+        "column": "Shift",
+        "value_set": [
+          "Morning",
+          "Afternoon",
+          "Night"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "0783a179-b42f-4dd0-be6a-4512b2f20c81",
+      "kwargs": {
+        "min_value": 1
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    }
+  ],
+  "id": "a21447cb-e8f4-4bc7-b96a-a3f53460e4a6",
+  "meta": {
+    "great_expectations_version": "1.19.0"
+  },
+  "name": "ops_quality_suite",
+  "notes": null
+}

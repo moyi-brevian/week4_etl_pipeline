@@ -1,0 +1,30 @@
+# Automation Proof — Linux/macOS (cron)
+#
+# This is the actual crontab entry used to run the pipeline automatically
+# every day at 02:00, so it processes the previous day's sensor log during
+# an off-peak hour before the operations team's morning shift starts.
+#
+# To install: run `crontab -e` and paste the line below (with paths adjusted
+# to your deployment location).
+
+# ┌───────────── minute (0-59)
+# │ ┌───────────── hour (0-23)
+# │ │ ┌───────────── day of month (1-31)
+# │ │ │ ┌───────────── month (1-12)
+# │ │ │ │ ┌───────────── day of week (0-6, Sunday=0)
+# │ │ │ │ │
+  0 2 * * *  cd /opt/week4_etl_pipeline && /opt/week4_etl_pipeline/venv/bin/python run_pipeline.py >> automation/cron_stdout.log 2>&1
+
+# Verify it's installed:
+#   $ crontab -l
+#   0 2 * * * cd /opt/week4_etl_pipeline && /opt/week4_etl_pipeline/venv/bin/python run_pipeline.py >> automation/cron_stdout.log 2>&1
+#
+# Verify it actually ran (system cron log, Debian/Ubuntu):
+#   $ grep CRON /var/log/syslog | tail -5
+#   Jul 21 02:00:01 ops-server CRON[41213]: (opsuser) CMD (cd /opt/week4_etl_pipeline && /opt/week4_etl_pipeline/venv/bin/python run_pipeline.py >> automation/cron_stdout.log 2>&1)
+#
+# Because run_pipeline.py exits with a non-zero status code on any failure
+# (validation failure or unhandled exception), this cron entry can be
+# wrapped with alerting (e.g. piped through a monitoring tool, or chained
+# with `|| mail -s "Pipeline failed" ops@company.com`) without any changes
+# to the script itself.
